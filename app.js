@@ -19,8 +19,8 @@ const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews');
 const MongoDBStore = require('connect-mongo')(session);
-const dbUrl = 'mongodb://localhost:27017/yelpcamp'
-// process.env.DB_URL || 
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelpcamp'
+
 const expressError = require('./utility/expressError');
 const mongoose = require('mongoose');
 
@@ -118,49 +118,6 @@ app.use(
 );
 
 
-// const scriptSrcUrls = [
-//     "https://stackpath.bootstrapcdn.com/",
-//     "https://api.tiles.mapbox.com/",
-//     "https://api.mapbox.com/",
-//     "https://kit.fontawesome.com/",
-//     "https://cdnjs.cloudflare.com/",
-//     "https://cdn.jsdelivr.net",
-// ];
-// const styleSrcUrls = [
-//     "https://kit-free.fontawesome.com/",
-//     "https://stackpath.bootstrapcdn.com/",
-//     "https://api.mapbox.com/",
-//     "https://api.tiles.mapbox.com/",
-//     "https://fonts.googleapis.com/",
-//     "https://use.fontawesome.com/",
-// ];
-// const connectSrcUrls = [
-//     "https://api.mapbox.com/",
-//     "https://a.tiles.mapbox.com/",
-//     "https://b.tiles.mapbox.com/",
-//     "https://events.mapbox.com/",
-// ];
-// const fontSrcUrls = [];
-// app.use(
-//     helmet.contentSecurityPolicy({
-//         directives: {
-//             defaultSrc: [],
-//             connectSrc: ["'self'", ...connectSrcUrls],
-//             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-//             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-//             workerSrc: ["'self'", "blob:"],
-//             objectSrc: [],
-//             imgSrc: [
-//                 "'self'",
-//                 "blob:",
-//                 "data:",
-//                 "https://res.cloudinary.com/mrpaulcloud/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
-//                 "https://images.unsplash.com/",
-//             ],
-//             fontSrc: ["'self'", ...fontSrcUrls],
-//         },
-//     })
-// );
 
 
 app.use(passport.initialize());
@@ -202,6 +159,8 @@ app.use((err, req, res, next)=>{
     res.status(status).render('error',{err});
 })
 
-app.listen(3000, () => {
-    console.log("server port 3000 listen");
+const port = process.env.Port || 3000;
+
+app.listen(port, () => {
+    console.log(`server on port ${port}`);
 });
