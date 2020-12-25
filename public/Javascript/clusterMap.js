@@ -2,7 +2,7 @@ mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
     container: 'cluster-map',
     style: 'mapbox://styles/mapbox/dark-v10',
-    center: [28.63535, 77.29098],
+    center: [77.29098, 28.63535],
     zoom: 3
 });
 
@@ -20,7 +20,7 @@ map.on('load', function () {
         cluster: true,
         clusterMaxZoom: 14, // Max zoom to cluster points on
         clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
-    });
+    });40.66995747013945
 
     map.addLayer({
         id: 'clusters',
