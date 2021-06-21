@@ -149,13 +149,13 @@ app.get('/about',(req, res)=>{
 })
 
 app.all('*',(req, res, next)=>{
-    next(new expressError('Page Not found',404));
+    next(new expressError('Page not found',404));
 })
 
 app.use((err, req, res, next)=>{
     const {status=500} = err;
     if(!err.message) err.message='something went wrong!';
-    console.log(err)
+    console.log(err.message)
     res.status(status).render('error',{err});
 })
 
